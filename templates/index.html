@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Price Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="hero">
+        <h1>House Price Prediction</h1>
+    </div>
+
+    <div class="container animate-fade-in">
+        <div class="feature-card">
+            <h3><i class="fas fa-info-circle"></i> How It Works</h3>
+            <p>Enter your house details below to get an estimated price prediction based on our advanced machine learning model.</p>
+        </div>
+
+        <form action="{{ url_for('predict') }}" method="post" id="prediction-form">
+            <div class="form-container">
+                <div class="form-group">
+                    <label for="bedrooms"><i class="fas fa-bed"></i> Bedrooms</label>
+                    <input type="number" id="bedrooms" name="bedrooms" required min="1" max="10" step="1">
+                </div>
+                
+                <div class="form-group">
+                    <label for="bathrooms"><i class="fas fa-bath"></i> Bathrooms</label>
+                    <input type="number" id="bathrooms" name="bathrooms" required min="1" max="7" step="0.5">
+                </div>
+                
+                <div class="form-group">
+                    <label for="sqft_living"><i class="fas fa-home"></i> Living Area (sq ft)</label>
+                    <input type="number" id="sqft_living" name="sqft_living" required min="500">
+                </div>
+                
+                <div class="form-group">
+                    <label for="sqft_lot"><i class="fas fa-layer-group"></i> Lot Size (sq ft)</label>
+                    <input type="number" id="sqft_lot" name="sqft_lot" required min="500">
+                </div>
+                
+                <div class="form-group">
+                    <label for="floors"><i class="fas fa-building"></i> Floors</label>
+                    <select id="floors" name="floors" required>
+                        <option value="1">1</option>
+                        <option value="1.5">1.5</option>
+                        <option value="2">2</option>
+                        <option value="2.5">2.5</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="waterfront"><i class="fas fa-water"></i> Waterfront</label>
+                    <select id="waterfront" name="waterfront" required>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="view"><i class="fas fa-eye"></i> View Quality</label>
+                    <select id="view" name="view" required>
+                        <option value="0">None</option>
+                        <option value="1">Fair</option>
+                        <option value="2">Average</option>
+                        <option value="3">Good</option>
+                        <option value="4">Excellent</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="condition"><i class="fas fa-star"></i> Condition</label>
+                    <select id="condition" name="condition" required>
+                        <option value="1">Poor</option>
+                        <option value="2">Fair</option>
+                        <option value="3">Average</option>
+                        <option value="4">Good</option>
+                        <option value="5">Excellent</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="grade"><i class="fas fa-award"></i> Grade</label>
+                    <input type="number" id="grade" name="grade" required min="1" max="13">
+                </div>
+                
+                <div class="form-group">
+                    <label for="yr_built"><i class="fas fa-calendar"></i> Year Built</label>
+                    <input type="number" id="yr_built" name="yr_built" required min="1900" max="2023">
+                </div>
+            </div>
+
+            <button type="submit" class="btn">
+                <i class="fas fa-calculator"></i> Predict Price
+            </button>
+        </form>
+    </div>
+
+    <div id="loading" class="loading" style="display: none;">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <script>
+        document.getElementById('prediction-form').onsubmit = function() {
+            document.getElementById('loading').style.display = 'flex';
+        };
+    </script>
+</body>
+</html>

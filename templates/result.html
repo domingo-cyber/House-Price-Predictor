@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="hero">
+        <h1>Prediction Result</h1>
+    </div>
+
+    <div class="container animate-fade-in">
+        {% if error %}
+        <div class="error">
+            <i class="fas fa-exclamation-triangle"></i> {{ error }}
+        </div>
+        {% else %}
+        <div class="result">
+            <i class="fas fa-home" style="font-size: 3rem; color: var(--secondary-color);"></i>
+            <h2>Estimated House Price</h2>
+            <p class="prediction">{{ prediction }}</p>
+        </div>
+        {% endif %}
+        
+        <a href="{{ url_for('home') }}" class="btn">
+            <i class="fas fa-arrow-left"></i> Make Another Prediction
+        </a>
+    </div>
+</body>
+</html>
